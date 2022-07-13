@@ -1,0 +1,73 @@
+{
+  "name": "@voxpelli/node-module-template",
+  "version": "0.0.0",
+  "description": "A GitHub template repo for node modules",
+  "homepage": "http://github.com/voxpelli/node-module-template",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/voxpelli/node-module-template.git"
+  },
+  "keywords": [],
+  "author": "Pelle Wessman <pelle@kodfabrik.se> (http://kodfabrik.se/)",
+  "license": "MIT",
+  "engines": {
+    "node": "^14.18.0 || >=16.0.0"
+  },
+  "type": "module",
+  "exports": "./index.js",
+  "types": "index.d.ts",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "index.d.ts.map",
+    "lib/*.js",
+    "lib/*.d.ts",
+    "lib/*.d.ts.map"
+  ],
+  "scripts": {
+    "build:0": "run-s clean",
+    "build:1-declaration": "tsc -p declaration.tsconfig.json",
+    "build": "run-s build:*",
+    "check:dependency-check": "dependency-check '*.js' 'test/**/*.js' --no-dev",
+    "check:installed-check": "installed-check -i eslint-plugin-jsdoc",
+    "check:lint": "eslint .",
+    "check:tsc": "tsc",
+    "check:type-coverage": "type-coverage --detail --strict --at-least 99 --ignore-files 'test/*'",
+    "check": "run-s clean && run-p -c --aggregate-output check:*",
+    "clean:declarations": "rm -rf $(find . -maxdepth 2 -type f -name '*.d.ts*')",
+    "clean": "run-p clean:*",
+    "prepare": "husky install",
+    "prepublishOnly": "run-s build",
+    "sync-gh-actions": "ghat",
+    "test:mocha": "c8 --reporter=lcov --reporter text mocha 'test/**/*.spec.js'",
+    "test-ci": "run-s test:*",
+    "test": "run-s check test:*"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.1",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "^14.18.21",
+    "@voxpelli/eslint-config": "^15.0.0",
+    "@voxpelli/tsconfig": "^4.0.0",
+    "c8": "^7.11.3",
+    "chai": "^4.3.6",
+    "dependency-check": "^5.0.0-7",
+    "eslint": "^8.19.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-es": "^4.1.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsdoc": "^39.3.3",
+    "eslint-plugin-mocha": "^10.0.5",
+    "eslint-plugin-n": "^15.2.4",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-security": "^1.5.0",
+    "eslint-plugin-sort-destructure-keys": "^1.4.0",
+    "eslint-plugin-unicorn": "^43.0.1",
+    "husky": "^8.0.1",
+    "installed-check": "^6.0.1",
+    "mocha": "^10.0.0",
+    "npm-run-all2": "^6.0.1",
+    "type-coverage": "^2.21.2",
+    "typescript": "~4.6.0"
+  }
+}

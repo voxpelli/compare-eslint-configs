@@ -1,0 +1,14 @@
+{
+  "extends": "@voxpelli/tsconfig/node14.json",
+  "files": [
+    "index.js"
+  ],
+  "include": [
+    "lib/**/*",
+    "test/**/*",
+  ],
+  "compilerOptions": {
+    "module": "es2022",
+    "moduleResolution": "node"
+  }
+}
