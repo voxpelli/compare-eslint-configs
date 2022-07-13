@@ -1,4 +1,7 @@
 {
   "extends": "@voxpelli",
-  "root": true
+  "root": true,
+  "rules": {
+    "func-style": ["warn", "declaration", { "allowArrowFunctions": true }]
+  }
 }
