@@ -8,6 +8,11 @@ describe('compare', () => {
   it('should work', async () => {
     // TODO: Make it sensible
     const differences = await compareConfigs({});
-    differences.should.equal({});
+
+    differences.should.equal({
+      'mixedConfigs': {},
+      'mixedSeverity': {},
+      'onlyActiveIn': {},
+    });
   });
 });
