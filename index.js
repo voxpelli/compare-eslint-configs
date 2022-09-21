@@ -29,7 +29,7 @@ const {
 
 for (const configName of Object.keys(onlyActiveIn).sort()) {
   console.log(`Only active in ${configName}:`);
-  for (const ruleName of onlyActiveIn[configName].sort()) {
+  for (const ruleName of onlyActiveIn[configName]?.sort() || []) {
     console.log(chalk[configName === 'standard' ? 'green' : 'red'](`  ${ruleName}`));
   }
 }
@@ -48,7 +48,9 @@ console.log('Mixed configs where otherwise okay:');
 for (const ruleName of Object.keys(mixedConfigs).sort()) {
   console.log(`  ${ruleName}:`);
   const mixedConfig = mixedConfigs[ruleName];
-  for (const configName of Object.keys(mixedConfig).sort()) {
-    console.log(chalk[configName === 'standard' ? 'green' : 'red'](`    ${JSON.stringify(mixedConfig[configName])}`));
+  if (mixedConfig) {
+    for (const configName of Object.keys(mixedConfig).sort()) {
+      console.log(chalk[configName === 'standard' ? 'green' : 'red'](`    ${JSON.stringify(mixedConfig[configName])}`));
+    }
   }
 }
