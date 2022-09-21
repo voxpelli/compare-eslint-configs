@@ -18,4 +18,3 @@ jobs:
     uses: voxpelli/ghatemplates/.github/workflows/test.yml@main
     with:
       node-versions: '14,16,18'
-      os: 'ubuntu-latest,windows-latest'
