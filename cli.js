@@ -21,6 +21,7 @@ const cli = meow(`
   Compares the provided eslint config files.
 
   Options
+    -r, --by-rule  Prints the rules that only exists in some configs grouped by rule rather than config.
     -t, --target   The target file to compare the config for. Defaults to index.js
     --help         Print this help and exits.
     --version      Prints current version and exits.
@@ -30,15 +31,22 @@ const cli = meow(`
 `, {
   importMeta: import.meta,
   flags: {
+    byRule: {
+      alias: 'r',
+      type: 'boolean',
+      'default': false
+    },
     target: {
       alias: 't',
       type: 'string',
+      'default': 'index.js'
     },
   }
 });
 
 const {
-  target = 'index.js',
+  byRule,
+  target,
 } = cli.flags;
 
 const configFiles = [...cli.input];
@@ -85,7 +93,7 @@ try {
 
   const differences = compareConfigs(configs);
 
-  printComparationResult(differences, configFiles);
+  printComparationResult(differences, configFiles, { groupByRule: byRule });
 } catch (err) {
   console.error(
     chalk.bgRed('Unexpected error:') +
