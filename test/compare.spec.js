@@ -9,7 +9,7 @@ describe('compare', () => {
     // TODO: Make it sensible
     const differences = await compareConfigs({});
 
-    differences.should.equal({
+    differences.should.deep.equal({
       'mixedConfigs': {},
       'mixedSeverity': {},
       'onlyActiveIn': {},

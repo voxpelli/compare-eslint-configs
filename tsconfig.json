@@ -1,7 +1,7 @@
 {
   "extends": "@voxpelli/tsconfig/node14.json",
   "files": [
-    "index.js"
+    "cli.js"
   ],
   "include": [
     "lib/**/*",

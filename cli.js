@@ -8,7 +8,7 @@ import { cwd } from 'node:process';
 import chalk from 'chalk';
 import { ESLint } from 'eslint';
 import meow from 'meow';
-import { ErrorWithCause, messageWithCauses, stackWithCauses } from 'pony-cause';
+import { messageWithCauses, stackWithCauses } from 'pony-cause';
 
 import { compareConfigs } from './lib/compare.js';
 import { printComparationResult } from './lib/print-result.js';
@@ -76,7 +76,7 @@ try {
     });
 
     /** @type {import('eslint').Linter.Config} */
-    const config = engine.calculateConfigForFile(targetAbsolute);
+    const config = await engine.calculateConfigForFile(targetAbsolute);
 
     return config;
   });
