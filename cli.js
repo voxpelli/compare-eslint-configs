@@ -21,6 +21,7 @@ const cli = meow(`
   Compares the provided eslint config files.
 
   Options
+    -m, --markdown     Format the result as Markdown instead. Useful for copy and pasting into eg. GitHub.
     -r, --group-rules  Prints the rules that only exists in some configs grouped by rule rather than config.
     -t, --target-file  The file context which the eslint config should be compared in. Defaults to index.js
     --help             Print this help and exits.
@@ -36,6 +37,11 @@ const cli = meow(`
       type: 'boolean',
       'default': false
     },
+    markdown: {
+      alias: 'm',
+      type: 'boolean',
+      'default': false
+    },
     targetFile: {
       alias: 't',
       type: 'string',
@@ -46,6 +52,7 @@ const cli = meow(`
 
 const {
   groupRules: groupByRule,
+  markdown,
   targetFile,
 } = cli.flags;
 
@@ -93,7 +100,10 @@ try {
 
   const differences = compareConfigs(configs);
 
-  printComparationResult(differences, configFiles, { groupByRule });
+  printComparationResult(differences, configFiles, {
+    groupByRule,
+    markdown,
+  });
 } catch (err) {
   console.error(
     chalk.bgRed('Unexpected error:') +

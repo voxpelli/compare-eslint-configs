@@ -38,7 +38,8 @@
     "prepublishOnly": "run-s build",
     "test:mocha": "c8 --reporter=lcov --reporter text mocha 'test/**/*.spec.js'",
     "test-ci": "run-s test:*",
-    "test": "run-s check test:*"
+    "test": "run-s check test:*",
+    "try": "node cli.js new.eslintrc -t cli.js"
   },
   "devDependencies": {
     "@types/chai": "^4.3.3",
