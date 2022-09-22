@@ -16,27 +16,27 @@ import { zipObject } from './lib/utils.js';
 
 const cli = meow(`
   Usage
-    $ compare-eslint -t <target file> <eslint config files, separated by spaces>
+    $ compare-eslint <eslint config files, separated by spaces>
 
   Compares the provided eslint config files.
 
   Options
-    -r, --by-rule  Prints the rules that only exists in some configs grouped by rule rather than config.
-    -t, --target   The target file to compare the config for. Defaults to index.js
-    --help         Print this help and exits.
-    --version      Prints current version and exits.
+    -r, --group-rules  Prints the rules that only exists in some configs grouped by rule rather than config.
+    -t, --target-file  The file context which the eslint config should be compared in. Defaults to index.js
+    --help             Print this help and exits.
+    --version          Prints current version and exits.
 
   Examples
     $ compare-eslint -t foo.js .eslintrc alternative.eslintrc.json
 `, {
   importMeta: import.meta,
   flags: {
-    byRule: {
+    groupRules: {
       alias: 'r',
       type: 'boolean',
       'default': false
     },
-    target: {
+    targetFile: {
       alias: 't',
       type: 'string',
       'default': 'index.js'
@@ -45,13 +45,13 @@ const cli = meow(`
 });
 
 const {
-  byRule,
-  target,
+  groupRules: groupByRule,
+  targetFile,
 } = cli.flags;
 
 const configFiles = [...cli.input];
 
-const targetAbsolute = path.resolve(cwd(), target);
+const targetAbsolute = path.resolve(cwd(), targetFile);
 
 if (configFiles.length === 0) {
   console.error(chalk.bgRed('Missing files:') + ' You need to provide at least one config files\n');
@@ -93,7 +93,7 @@ try {
 
   const differences = compareConfigs(configs);
 
-  printComparationResult(differences, configFiles, { groupByRule: byRule });
+  printComparationResult(differences, configFiles, { groupByRule });
 } catch (err) {
   console.error(
     chalk.bgRed('Unexpected error:') +

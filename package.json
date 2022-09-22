@@ -16,7 +16,7 @@
   },
   "type": "module",
   "bin": {
-    "compare-eslint": "cli.js"
+    "compare-eslint-configs": "cli.js"
   },
   "files": [
     "cli.js",
