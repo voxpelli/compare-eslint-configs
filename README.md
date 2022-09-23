@@ -10,9 +10,6 @@
 
 ```bash
 npm install -g compare-eslint-configs
-```
-
-```bash
 compare-eslint-configs .eslintrc new.eslintrc
 ```
 
@@ -21,6 +18,43 @@ Or simply:
 ```bash
 npx compare-eslint-configs .eslintrc new.eslintrc
 ```
+
+## Example
+
+### CLI output
+
+```bash
+npx compare-eslint-configs new.eslintrc -t cli.js
+```
+
+![CLI output](docs/cli-output2.png)
+
+### Markdown output
+
+```bash
+npx compare-eslint-configs new.eslintrc -t cli.js -m
+```
+
+> # Only active in some:
+>
+> * **new.eslintrc**
+>   * for-direction
+>
+>
+> # Mixed severities:
+>
+> * **func-style**
+>   * _warn_: .eslintrc
+>   * _error_: new.eslintrc
+>
+>
+> # Mixed configs where otherwise okay:
+>
+> * **no-console**
+>   * _new.eslintrc_:
+>     ```json
+>     [{"allow":["warn","error"]}]
+>     ```
 
 ## Syntax
 

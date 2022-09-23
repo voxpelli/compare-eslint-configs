@@ -1,7 +1,9 @@
 {
-  "extends": "eslint:recommended",
+  "extends": "./.eslintrc",
   "root": true,
   "rules": {
-    "func-style": ["error", "declaration", { "allowArrowFunctions": true }]
+    "for-direction": "error",
+    "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
+    "no-console": ["warn", { "allow": ["warn", "error"] }]
   }
 }
