@@ -38,23 +38,26 @@ npx compare-eslint-configs new.eslintrc -t cli.js -m
 > # Only active in some:
 >
 > * **new.eslintrc**
->   * for-direction
+>   * [for-direction](https://eslint.org/docs/rules/for-direction)
 >
 >
 > # Mixed severities:
 >
-> * **func-style**
+> * [**func-style**](https://eslint.org/docs/rules/func-style)
 >   * _warn_: .eslintrc
 >   * _error_: new.eslintrc
->
->
-> # Mixed configs where otherwise okay:
->
-> * **no-console**
->   * _new.eslintrc_:
->     ```json
->     [{"allow":["warn","error"]}]
->     ```
+> * [**unicorn/prefer-event-target**](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/v43.0.2/docs/rules/prefer-event-target.md)
+>   * _warn_: .eslintrc
+>   * _error_: new.eslintrc
+
+
+# Mixed configs where otherwise okay:
+
+* [**no-console**](https://eslint.org/docs/rules/no-console)
+  * _new.eslintrc_:
+    ```json
+    [{"allow":["warn","error"]}]
+    ```
 
 ## Syntax
 

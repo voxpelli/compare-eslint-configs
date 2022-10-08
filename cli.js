@@ -93,7 +93,7 @@ try {
     /** @type {import('eslint').Linter.Config} */
     const config = await engine.calculateConfigForFile(targetAbsolute);
 
-    return config;
+    return { config, engine };
   });
 
   const configs = zipObject(configFiles, await Promise.all(executions));

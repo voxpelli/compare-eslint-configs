@@ -13,6 +13,7 @@ describe('compare', () => {
       'mixedConfigs': {},
       'mixedSeverity': {},
       'onlyActiveIn': {},
+      'ruleDocs': {}
     });
   });
 });

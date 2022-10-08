@@ -4,6 +4,7 @@
   "rules": {
     "for-direction": "error",
     "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
-    "no-console": ["warn", { "allow": ["warn", "error"] }]
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "unicorn/prefer-event-target": ["error"]
   }
 }
