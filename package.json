@@ -27,7 +27,7 @@
     "build": "run-s build:*",
     "check:dependency-check": "dependency-check '*.js' 'test/**/*.js' --no-dev",
     "check:installed-check": "installed-check -i eslint-plugin-jsdoc",
-    "check:lint": "eslint .",
+    "check:lint": "eslint --report-unused-disable-directives .",
     "check:tsc": "tsc",
     "check:type-coverage": "type-coverage --detail --strict --at-least 95 --ignore-files 'test/*'",
     "check": "run-s clean && run-p -c --aggregate-output check:*",
