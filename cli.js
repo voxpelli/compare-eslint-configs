@@ -73,9 +73,6 @@ if (!targetStat.isFile) {
   process.exit(1);
 }
 
-// TODO: First check that both configs exist? And/or generate the configs on the fly?
-// TODO: Make target file configurable?
-
 try {
   const executions = configFiles.map(async configFile => {
     const configFileAbsolute = path.resolve(cwd(), configFile);
