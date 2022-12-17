@@ -61,7 +61,7 @@ const configFiles = [...cli.input];
 const targetAbsolute = path.resolve(cwd(), targetFile);
 
 if (configFiles.length === 0) {
-  console.error(chalk.bgRed('Missing files:') + ' You need to provide at least one config files\n');
+  cli.showHelp();
   process.exit(1);
 } else if (configFiles.length === 1) {
   configFiles.unshift('.eslintrc');
