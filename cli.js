@@ -79,6 +79,7 @@ if (configFiles.length === 0) {
 }
 
 const targetAbsolute = path.resolve(cwd(), targetFile);
+// eslint-disable-next-line security/detect-non-literal-fs-filename
 const targetStat = await stat(targetAbsolute).catch(() => {});
 
 if (!targetStat || !targetStat.isFile) {
@@ -90,6 +91,7 @@ if (!targetStat || !targetStat.isFile) {
 try {
   const executions = configFiles.map(async configFile => {
     const configFileAbsolute = path.resolve(cwd(), configFile);
+    // eslint-disable-next-line security/detect-non-literal-fs-filename
     const configStat = await stat(configFileAbsolute);
 
     if (!configStat.isFile) {
