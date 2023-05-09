@@ -48,7 +48,7 @@ const cli = meow(`
     table: { type: 'boolean', 'default': false },
     targetFile: { alias: 't', type: 'string', 'default': 'index.js' },
     verboseConfigs: { type: 'boolean', 'default': false },
-  }
+  },
 });
 
 const {
@@ -98,7 +98,7 @@ try {
 
     const engine = new ESLint({
       useEslintrc: false,
-      overrideConfigFile: configFileAbsolute
+      overrideConfigFile: configFileAbsolute,
     });
 
     /** @type {import('eslint').Linter.Config} */
