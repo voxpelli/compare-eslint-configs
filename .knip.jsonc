@@ -1,0 +1,9 @@
+{
+  "$schema": "https://unpkg.com/knip@2/schema.json",
+  "entry": ["cli.js!"],
+  "ignoreDependencies": ["@types/mocha", "mocha"],
+  "rules": {
+    // TODO: Remove when "chalk-markdown" has been extracted into its own npm package
+    "classMembers": "warn"
+  }
+}
