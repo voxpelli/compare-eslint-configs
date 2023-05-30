@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@types/chai": "^4.3.5",
-    "@types/eslint": "^8.4.10",
+    "@types/eslint": "^8.40.0",
     "@types/mocha": "^10.0.1",
     "@types/node": "^16.18.28",
     "@voxpelli/eslint-config": "^17.0.3",
@@ -65,8 +65,8 @@
     "mdast": "^3.0.0",
     "mocha": "^10.2.0",
     "npm-run-all2": "^6.0.5",
-    "type-coverage": "^2.24.1",
-    "typescript": "~5.0.2"
+    "type-coverage": "^2.26.0",
+    "typescript": "~5.0.4"
   },
   "dependencies": {
     "chalk": "^5.2.0",
