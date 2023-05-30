@@ -48,7 +48,7 @@
     "@types/node": "^16.18.28",
     "@voxpelli/eslint-config": "^17.0.3",
     "@voxpelli/tsconfig": "^7.0.0",
-    "c8": "^7.13.0",
+    "c8": "^7.14.0",
     "chai": "^4.3.7",
     "eslint-plugin-es-x": "^7.1.0",
     "eslint-plugin-import": "^2.27.5",
@@ -64,7 +64,7 @@
     "knip": "^2.12.1",
     "mdast": "^3.0.0",
     "mocha": "^10.2.0",
-    "npm-run-all2": "^6.0.4",
+    "npm-run-all2": "^6.0.5",
     "type-coverage": "^2.24.1",
     "typescript": "~5.0.2"
   },
