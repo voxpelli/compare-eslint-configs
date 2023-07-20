@@ -11,7 +11,7 @@
   "author": "Pelle Wessman <pelle@kodfabrik.se> (http://kodfabrik.se/)",
   "license": "MIT",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=18.0.0"
   },
   "type": "module",
   "bin": {
@@ -45,7 +45,7 @@
     "@types/chai": "^4.3.5",
     "@types/eslint": "^8.40.0",
     "@types/mocha": "^10.0.1",
-    "@types/node": "^16.18.28",
+    "@types/node": "^18.16.19",
     "@voxpelli/eslint-config": "^17.0.3",
     "@voxpelli/tsconfig": "^7.0.0",
     "c8": "^7.14.0",
