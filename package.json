@@ -42,15 +42,15 @@
     "try-table": "node cli.js new.eslintrc -t cli.js -m -s --table"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.5",
+    "@types/chai": "^4.3.11",
     "@types/eslint": "^8.40.0",
     "@types/mdast": "^3.0.12",
-    "@types/mocha": "^10.0.1",
+    "@types/mocha": "^10.0.6",
     "@types/node": "^18.18.7",
     "@voxpelli/eslint-config": "^18.0.0",
     "@voxpelli/tsconfig": "^9.0.0",
-    "c8": "^8.0.0",
-    "chai": "^4.3.7",
+    "c8": "^8.0.1",
+    "chai": "^4.3.10",
     "eslint-plugin-es-x": "^7.1.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-jsdoc": "^46.4.4",
@@ -64,7 +64,7 @@
     "installed-check": "^8.0.0",
     "knip": "^2.16.0",
     "mocha": "^10.2.0",
-    "npm-run-all2": "^6.0.6",
+    "npm-run-all2": "^6.1.1",
     "type-coverage": "^2.27.0",
     "typescript": "~5.2.2"
   },
