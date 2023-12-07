@@ -46,9 +46,9 @@
     "@types/eslint": "^8.40.0",
     "@types/mdast": "^3.0.12",
     "@types/mocha": "^10.0.1",
-    "@types/node": "^18.18.7",
+    "@types/node": "^18.19.3",
     "@voxpelli/eslint-config": "^19.0.0",
-    "@voxpelli/tsconfig": "^9.0.0",
+    "@voxpelli/tsconfig": "^10.0.0",
     "c8": "^8.0.0",
     "chai": "^4.3.7",
     "eslint-plugin-es-x": "^7.5.0",
@@ -66,7 +66,7 @@
     "mocha": "^10.2.0",
     "npm-run-all2": "^6.0.6",
     "type-coverage": "^2.27.0",
-    "typescript": "~5.2.2"
+    "typescript": "~5.3.3"
   },
   "dependencies": {
     "chalk": "^5.2.0",
