@@ -44,14 +44,14 @@ const cli = meow(`
 `, {
   importMeta: import.meta,
   flags: {
-    diff: { alias: 'd', type: 'boolean', 'default': false },
-    groupRules: { alias: 'r', type: 'boolean', 'default': false },
-    json: { alias: 'j', type: 'boolean', 'default': false },
+    diff: { shortFlag: 'd', type: 'boolean', 'default': false },
+    groupRules: { shortFlag: 'r', type: 'boolean', 'default': false },
+    json: { shortFlag: 'j', type: 'boolean', 'default': false },
     links: { type: 'boolean', 'default': true },
-    markdown: { alias: 'm', type: 'boolean', 'default': false },
-    summary: { alias: 's', type: 'boolean', 'default': false },
+    markdown: { shortFlag: 'm', type: 'boolean', 'default': false },
+    summary: { shortFlag: 's', type: 'boolean', 'default': false },
     table: { type: 'boolean', 'default': false },
-    targetFile: { alias: 't', type: 'string', 'default': 'index.js' },
+    targetFile: { shortFlag: 't', type: 'string', 'default': 'index.js' },
     verboseConfigs: { type: 'boolean', 'default': false },
   },
 });
