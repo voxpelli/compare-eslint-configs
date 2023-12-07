@@ -186,12 +186,21 @@ try {
   } else {
     const differences = compareConfigs(configs);
 
+    if (table) {
+      console.error(chalk.bgRed('Unsupported option:') + ' Table is not yet supported for comparison output');
+      process.exit(1);
+    }
+    if (verboseConfigs) {
+      console.error(chalk.bgRed('Unsupported option:') + ' Verbose configs are not yet supported for comparison output');
+      process.exit(1);
+    }
+
     printComparationResult(differences, configFiles, {
       groupByRule,
       markdown,
       skipLinks: !links,
-      table,
-      verboseConfigs,
+      // table,
+      // verboseConfigs,
     });
   }
 } catch (err) {
