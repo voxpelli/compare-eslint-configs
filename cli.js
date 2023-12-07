@@ -14,6 +14,7 @@ import { compareConfigs, diffConfigs, summarizeConfigs } from './lib/compare.js'
 import { printComparationResult } from './lib/print-result.js';
 import { zipObject } from './lib/utils.js';
 import { printConfigSummary } from './lib/print-summary.js';
+import { printDiffResult } from './lib/print-diff.js';
 
 const cli = meow(`
   Usage
@@ -142,23 +143,18 @@ try {
       });
     }
   } else if (diff) {
-    if (!jsonOutput) {
-      console.error(chalk.bgRed('Unsupported output:') + ' JSON output is currently the only supported output for diffs');
-      process.exit(1);
-    }
-    if (configFiles.length > 2) {
-      console.error(chalk.bgRed('Too many configs:') + ' Diff calculation only works when given two configs');
-      process.exit(1);
-    }
-
     const targetConfigName = configFiles[0] || '';
     const sourceConfigName = configFiles[1] || '';
 
     const targetConfig = configs[targetConfigName];
     const sourceConfig = configs[sourceConfigName];
 
-    if (!targetConfig || !sourceConfig) {
-      console.error(chalk.bgRed('Too few configs:') + ' Diff calculation only works when given two configs');
+    if (configFiles.length > 2 || !targetConfig || !sourceConfig) {
+      console.error(chalk.bgRed('Incorrect number of configs:') + ' Diff calculation only works when given two configs');
+      process.exit(1);
+    }
+    if (table) {
+      console.error(chalk.bgRed('Unsupported option:') + ' Table is not yet supported for comparison output');
       process.exit(1);
     }
 
@@ -168,20 +164,29 @@ try {
     );
 
     if (diffResult) {
-      const {
-        added,
-        changedConfig,
-        changedSeverity,
-        removed,
-      } = diffResult;
+      if (jsonOutput) {
+        const {
+          added,
+          changedConfig,
+          changedSeverity,
+          removed,
+        } = diffResult;
 
-      console.log(JSON.stringify({
-        added,
-        changedConfig,
-        changedSeverity,
-        removed,
-      }, undefined, 2));
-      process.exit(2);
+        console.log(JSON.stringify({
+          added,
+          changedConfig,
+          changedSeverity,
+          removed,
+        }, undefined, 2));
+        process.exit(2);
+      } else {
+        printDiffResult(diffResult, {
+          markdown,
+          skipLinks: !links,
+          // table,
+          verboseConfigs,
+        });
+      }
     }
   } else {
     const differences = compareConfigs(configs);
