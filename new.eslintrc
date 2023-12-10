@@ -3,8 +3,11 @@
   "root": true,
   "rules": {
     "for-direction": "error",
-    "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
+    "func-style": ["error", "expression", { "allowArrowFunctions": true }],
     "no-console": ["warn", { "allow": ["warn", "error"] }],
-    "unicorn/prefer-event-target": ["error"]
+    "no-multi-spaces": ["error", {}],
+    "jsdoc/require-returns": ["warn", { "publicOnly": true }],
+    "unicorn/prefer-event-target": ["error"],
+    "unicorn/catch-error-name": ["error", { "name": "foo", "ignore": ["^cause$"] }]
   }
 }

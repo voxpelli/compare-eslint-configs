@@ -12,7 +12,7 @@ import { messageWithCauses, stackWithCauses } from 'pony-cause';
 
 import { compareConfigs, diffConfigs, summarizeConfigs } from './lib/compare.js';
 import { printComparationResult } from './lib/print-result.js';
-import { zipObject } from './lib/utils.js';
+import { zipObject } from './lib/utils/misc.js';
 import { printConfigSummary } from './lib/print-summary.js';
 import { printDiffResult } from './lib/print-diff.js';
 
@@ -37,6 +37,7 @@ const cli = meow(`
 
   Additional options
     --help             Print this help and exits.
+    --verbose      -v  Prints verbose output such as debug messages
     --version          Prints current version and exits.
 
   Examples
@@ -52,6 +53,7 @@ const cli = meow(`
     summary: { shortFlag: 's', type: 'boolean', 'default': false },
     table: { type: 'boolean', 'default': false },
     targetFile: { shortFlag: 't', type: 'string', 'default': 'index.js' },
+    verbose: { shortFlag: 'v', type: 'boolean', 'default': false },
     verboseConfigs: { type: 'boolean', 'default': false },
   },
 });
@@ -65,6 +67,7 @@ const {
   summary,
   table,
   targetFile,
+  verbose,
   verboseConfigs,
 } = cli.flags;
 
@@ -160,7 +163,8 @@ try {
 
     const diffResult = diffConfigs(
       { configName: targetConfigName, config: targetConfig },
-      { configName: sourceConfigName, config: sourceConfig }
+      { configName: sourceConfigName, config: sourceConfig },
+      { verbose }
     );
 
     if (diffResult) {

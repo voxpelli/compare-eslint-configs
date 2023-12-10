@@ -10,8 +10,8 @@
 /yarn.lock
 
 # Generated types
-*.d.ts
-*.d.ts.map
+*.d.*ts
+*.d.*ts.map
 !/lib/advanced-types.d.ts
 
 # Library specific ones
