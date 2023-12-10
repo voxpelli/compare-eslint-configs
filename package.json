@@ -1,6 +1,6 @@
 {
   "name": "compare-eslint-configs",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Compares ESLint configs",
   "homepage": "http://github.com/voxpelli/compare-eslint-configs",
   "repository": {
