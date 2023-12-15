@@ -16,6 +16,10 @@ import { zipObject } from './lib/utils/misc.js';
 import { printConfigSummary } from './lib/print-summary.js';
 import { printDiffResult } from './lib/print-diff.js';
 
+const exitCodeDiff = 1;
+const exitCodeInput = 2;
+const exitCodeException = 3;
+
 const cli = meow(`
   Usage
     $ compare-eslint <eslint config files, separated by spaces>
@@ -31,9 +35,12 @@ const cli = meow(`
     --verbose-configs  Includes full config data in the output, even the complex one
 
   Comparison options
-    --summary      -s  Prints a summary of the specified configs instead
     --diff         -d  Prints what's changed between the second and the first file
+    --summary      -s  Prints a summary of the specified configs instead
     --target-file  -t  The file context which the eslint config should be compared in. Defaults to index.js
+
+  Diff options
+    --exit-code    -e  Make the program exit with codes similar to diff, 1 if there were differences else 0
 
   Additional options
     --help             Print this help and exits.
@@ -46,6 +53,7 @@ const cli = meow(`
   importMeta: import.meta,
   flags: {
     diff: { shortFlag: 'd', type: 'boolean', 'default': false },
+    exitCode: { shortFlag: 'e', type: 'boolean', 'default': false },
     groupRules: { shortFlag: 'r', type: 'boolean', 'default': false },
     json: { shortFlag: 'j', type: 'boolean', 'default': false },
     links: { type: 'boolean', 'default': true },
@@ -60,6 +68,7 @@ const cli = meow(`
 
 const {
   diff,
+  exitCode,
   groupRules: groupByRule,
   json: jsonOutput,
   links,
@@ -73,15 +82,15 @@ const {
 
 if (markdown && jsonOutput) {
   console.error(chalk.bgRed('Conflicting options:') + ' Can\'t chose both JSON and Markdown at once');
-  process.exit(1);
+  process.exit(exitCodeInput);
 }
 if (diff && summary) {
   console.error(chalk.bgRed('Conflicting options:') + ' Can\'t chose both diff and summary at once');
-  process.exit(1);
+  process.exit(exitCodeInput);
 }
 if (jsonOutput && !diff) {
   console.error(chalk.bgRed('Unsupported output:') + ' JSON output is currently only supported for diffs');
-  process.exit(1);
+  process.exit(exitCodeInput);
 }
 
 const configFiles = [...cli.input];
@@ -89,13 +98,13 @@ const configFiles = [...cli.input];
 if (configFiles.length === 0) {
   if (!summary) {
     cli.showHelp();
-    process.exit(1);
+    process.exit(exitCodeInput);
   }
   configFiles.unshift('.eslintrc');
 } else if (configFiles.length === 1 && !summary) {
   if (configFiles[0] === '.eslintrc') {
     console.error(chalk.bgRed('Can\'t compare:') + ' There is nothing to compare .eslintrc to, add another config');
-    process.exit(1);
+    process.exit(exitCodeInput);
   }
 
   configFiles.unshift('.eslintrc');
@@ -108,7 +117,7 @@ const targetStat = await stat(targetAbsolute).catch(() => {});
 if (!targetStat || !targetStat.isFile) {
   // TODO: Add a fallback that automatically finds a JS file in the current folder
   console.error(chalk.bgRed('Invalid target:') + ` Can't find "${targetAbsolute}", set a target with --target-file`);
-  process.exit(1);
+  process.exit(exitCodeInput);
 }
 
 try {
@@ -154,11 +163,11 @@ try {
 
     if (configFiles.length > 2 || !targetConfig || !sourceConfig) {
       console.error(chalk.bgRed('Incorrect number of configs:') + ' Diff calculation only works when given two configs');
-      process.exit(1);
+      process.exit(exitCodeInput);
     }
     if (table) {
       console.error(chalk.bgRed('Unsupported option:') + ' Table is not yet supported for comparison output');
-      process.exit(1);
+      process.exit(exitCodeInput);
     }
 
     const diffResult = diffConfigs(
@@ -182,7 +191,6 @@ try {
           changedSeverity,
           removed,
         }, undefined, 2));
-        process.exit(2);
       } else {
         printDiffResult(diffResult, {
           markdown,
@@ -191,17 +199,19 @@ try {
           verboseConfigs,
         });
       }
+
+      process.exit(exitCode ? exitCodeDiff : 0);
     }
   } else {
     const differences = compareConfigs(configs);
 
     if (table) {
       console.error(chalk.bgRed('Unsupported option:') + ' Table is not yet supported for comparison output');
-      process.exit(1);
+      process.exit(exitCodeInput);
     }
     if (verboseConfigs) {
       console.error(chalk.bgRed('Unsupported option:') + ' Verbose configs are not yet supported for comparison output');
-      process.exit(1);
+      process.exit(exitCodeInput);
     }
 
     printComparationResult(differences, configFiles, {
@@ -218,5 +228,5 @@ try {
     (err instanceof Error ? ' ' + messageWithCauses(err) + '\n\n' + stackWithCauses(err) : '') +
     '\n'
   );
-  process.exit(1);
+  process.exit(exitCodeException);
 }
