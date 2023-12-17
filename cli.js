@@ -13,7 +13,7 @@ import { messageWithCauses, stackWithCauses } from 'pony-cause';
 import { compareConfigs, diffConfigs, summarizeConfigs } from './lib/compare.js';
 import { printComparationResult } from './lib/print-result.js';
 import { zipObject } from './lib/utils/misc.js';
-import { printConfigSummary } from './lib/print-summary.js';
+import { printConfigSummary } from './lib/commands/summary/print-summary.js';
 import { printDiffResult } from './lib/print-diff.js';
 
 const exitCodeDiff = 1;
@@ -148,7 +148,7 @@ try {
       const summarizedRules = summarizeConfigs({ [configName]: config });
 
       printConfigSummary(configName, summarizedRules, {
-        markdown,
+        outputMarkdown: markdown,
         skipLinks: !links,
         table,
         verboseConfigs,
