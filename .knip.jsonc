@@ -1,5 +1,5 @@
 {
   "$schema": "https://unpkg.com/knip@2/schema.json",
-  "entry": ["cli.js!"],
+  "entry": ["cli.js!", "cli2.js!"],
   "ignoreDependencies": ["@types/mdast", "@types/mocha"]
 }
