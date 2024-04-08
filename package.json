@@ -74,7 +74,7 @@
     "@voxpelli/typed-utils": "^1.1.0",
     "ajv": "^6.12.6",
     "chalk": "^5.2.0",
-    "eslint": "^8.55.0",
+    "eslint": "^9.0.0",
     "fast-deep-equal": "^3.1.3",
     "is-plain-obj": "^4.1.0",
     "markdown-or-chalk": "^0.2.0",
