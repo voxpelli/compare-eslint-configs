@@ -65,8 +65,8 @@
     "husky": "^8.0.3",
     "installed-check": "^8.0.1",
     "knip": "^3.8.1",
-    "mocha": "^10.5.1",
-    "npm-run-all2": "^6.2.0",
+    "mocha": "^10.6.0",
+    "npm-run-all2": "^6.2.2",
     "type-coverage": "^2.27.0",
     "typescript": "~5.3.3"
   },
