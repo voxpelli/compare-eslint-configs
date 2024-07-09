@@ -7,7 +7,7 @@ import { cwd } from 'node:process';
 
 import chalk from 'chalk';
 import { ESLint } from 'eslint';
-import meow from 'meow';
+import { peowly } from 'peowly';
 import { messageWithCauses, stackWithCauses } from 'pony-cause';
 
 import { compareConfigs, diffConfigs, summarizeConfigs } from './lib/compare.js';
@@ -16,69 +16,43 @@ import { zipObject } from './lib/utils/misc.js';
 import { printConfigSummary } from './lib/print-summary.js';
 import { printDiffResult } from './lib/print-diff.js';
 
+import { comparisonFlags, miscFlags, presentationFlags } from './lib/flags/misc.js';
+
 const exitCodeDiff = 1;
 const exitCodeInput = 2;
 const exitCodeException = 3;
 
-const cli = meow(`
-  Usage
-    $ compare-eslint <eslint config files, separated by spaces>
-
-  Compares or summarizes the provided eslint config file(s).
-
-  Presentation options
-    --group-rules  -r  Prints the rules that only exists in some configs grouped by rule rather than config.
-    --json         -j  Output the results as JSON instead.
-    --markdown     -m  Format the result as Markdown instead. Useful for copy and pasting into eg. GitHub.
-    --no-links         Skips adding hyperlinks to rule documentation
-    --table            Prints the output in a table format rather than list format
-    --verbose-configs  Includes full config data in the output, even the complex one
-
-  Comparison options
-    --diff         -d  Prints what's changed between the second and the first file
-    --summary      -s  Prints a summary of the specified configs instead
-    --target-file  -t  The file context which the eslint config should be compared in. Defaults to index.js
-
-  Diff options
-    --exit-code    -e  Make the program exit with codes similar to diff, 1 if there were differences else 0
-
-  Additional options
-    --help             Print this help and exits.
-    --verbose      -v  Prints verbose output such as debug messages
-    --version          Prints current version and exits.
-
-  Examples
-    $ compare-eslint -t foo.js .eslintrc alternative.eslintrc.json
-`, {
-  importMeta: import.meta,
-  flags: {
-    diff: { shortFlag: 'd', type: 'boolean', 'default': false },
-    exitCode: { shortFlag: 'e', type: 'boolean', 'default': false },
-    groupRules: { shortFlag: 'r', type: 'boolean', 'default': false },
-    json: { shortFlag: 'j', type: 'boolean', 'default': false },
-    links: { type: 'boolean', 'default': true },
-    markdown: { shortFlag: 'm', type: 'boolean', 'default': false },
-    summary: { shortFlag: 's', type: 'boolean', 'default': false },
-    table: { type: 'boolean', 'default': false },
-    targetFile: { shortFlag: 't', type: 'string', 'default': 'index.js' },
-    verbose: { shortFlag: 'v', type: 'boolean', 'default': false },
-    verboseConfigs: { type: 'boolean', 'default': false },
-  },
-});
-
 const {
-  diff,
-  exitCode,
-  groupRules: groupByRule,
-  json: jsonOutput,
-  links,
-  markdown,
-  summary,
-  table,
-  targetFile,
-  verbose,
-  verboseConfigs,
-} = cli.flags;
+  flags: {
+    diff,
+    'exit-code': exitCode,
+    'group-rules': groupByRule,
+    json: jsonOutput,
+    markdown,
+    'no-links': skipLinks,
+    summary,
+    table,
+    targetFile,
+    verbose,
+    verboseConfigs,
+  },
+  input,
+  showHelp,
+} = peowly({
+  description: 'Compares or summarizes the provided eslint config file(s)',
+  examples: [
+    '-t foo.js .eslintrc alternative.eslintrc.json',
+  ],
+  name: 'compare-eslint-configs',
+  options: {
+    ...comparisonFlags,
+    ...miscFlags,
+    ...presentationFlags,
+  },
+  // TODO: Readd
+  // pkg,
+  usage: '<eslint config files, separated by spaces>',
+});
 
 if (markdown && jsonOutput) {
   console.error(chalk.bgRed('Conflicting options:') + ' Can\'t chose both JSON and Markdown at once');
@@ -93,11 +67,11 @@ if (jsonOutput && !diff) {
   process.exit(exitCodeInput);
 }
 
-const configFiles = [...cli.input];
+const configFiles = [...input];
 
 if (configFiles.length === 0) {
   if (!summary) {
-    cli.showHelp();
+    showHelp();
     process.exit(exitCodeInput);
   }
   configFiles.unshift('.eslintrc');
@@ -149,7 +123,7 @@ try {
 
       printConfigSummary(configName, summarizedRules, {
         markdown,
-        skipLinks: !links,
+        skipLinks,
         table,
         verboseConfigs,
       });
@@ -194,7 +168,7 @@ try {
       } else {
         printDiffResult(diffResult, {
           markdown,
-          skipLinks: !links,
+          skipLinks,
           // table,
           verboseConfigs,
         });
@@ -217,7 +191,7 @@ try {
     printComparationResult(differences, configFiles, {
       groupByRule,
       markdown,
-      skipLinks: !links,
+      skipLinks,
       // table,
       // verboseConfigs,
     });
