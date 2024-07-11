@@ -12,7 +12,7 @@
 # Generated types
 *.d.*ts
 *.d.*ts.map
-!/lib/advanced-types.d.ts
+!/lib/**/*-types.d.*ts
 
 # Library specific ones
 /test.md

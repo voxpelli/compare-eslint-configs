@@ -10,21 +10,33 @@
 
 ```bash
 npm install -g compare-eslint-configs
-compare-eslint-configs .eslintrc new.eslintrc
+compare-eslint-configs compare .eslintrc new.eslintrc
 ```
 
 Or simply:
 
 ```bash
-npx compare-eslint-configs .eslintrc new.eslintrc
+npx compare-eslint-configs compare .eslintrc new.eslintrc
 ```
+
+## Commands
+
+Found by running `compare-eslint-configs --help`
+
+  * **compare** - compares the provided eslint config file(s)
+  * **diff** - prints what's changed between the second and the first file
+  * **summary** - prints a summary of the specified configs
+
+## Options
+
+Found by running `compare-eslint-configs <command> --help`, eg: `compare-eslint-configs compare --help`
 
 ## Example
 
 ### CLI output
 
 ```bash
-npx compare-eslint-configs new.eslintrc -t cli.js
+npx compare-eslint-configs compare new.eslintrc -t cli.js
 ```
 
 ![CLI output](docs/cli-output2.png)
@@ -32,7 +44,7 @@ npx compare-eslint-configs new.eslintrc -t cli.js
 ### Markdown output
 
 ```bash
-npx compare-eslint-configs new.eslintrc -t cli.js -m
+npx compare-eslint-configs compare new.eslintrc -t cli.js -m
 ```
 
 > # Only active in some:
@@ -58,21 +70,6 @@ npx compare-eslint-configs new.eslintrc -t cli.js -m
 >   ```json
 >   [{"allow":["warn","error"]}]
 >   ```
-
-## Syntax
-
-```bash
-compare-eslint <eslint config files, separated by spaces>
-```
-
-If a single config file is given, then it will be assumed to be compared with `.eslintrc`.
-
-More than two config files can be compafred at once.
-
-### Flags
-
-* `-r` / `--group-rules` – when set the comparison output will group by rules rather than config
-* `-t <file>` / `--target-file <file>` – defaults to `index.js` – the file for which the config will be compared. Especially important when there's eg. different configs for `.js` and `.ts` files. Then point this to the one you want to do a comparison on.
 
 ## See also
 
