@@ -48,9 +48,9 @@
     "@types/eslint": "^8.44.9",
     "@types/mdast": "^4.0.3",
     "@types/mocha": "^10.0.7",
-    "@types/node": "^18.19.3",
+    "@types/node": "^18.19.50",
     "@voxpelli/eslint-config": "^19.0.0",
-    "@voxpelli/tsconfig": "^10.0.0",
+    "@voxpelli/tsconfig": "^14.0.0",
     "c8": "^8.0.1",
     "chai": "^4.4.1",
     "eslint-plugin-es-x": "^7.5.0",
@@ -67,8 +67,8 @@
     "knip": "^3.8.1",
     "mocha": "^10.5.1",
     "npm-run-all2": "^6.2.0",
-    "type-coverage": "^2.27.0",
-    "typescript": "~5.3.3"
+    "type-coverage": "^2.29.1",
+    "typescript": "~5.5.4"
   },
   "dependencies": {
     "@voxpelli/typed-utils": "^1.10.2",
