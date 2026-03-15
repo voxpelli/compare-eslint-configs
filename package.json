@@ -71,7 +71,7 @@
     "typescript": "~5.5.4"
   },
   "dependencies": {
-    "@voxpelli/typed-utils": "^1.10.2",
+    "@voxpelli/typed-utils": "^4.0.0",
     "ajv": "^6.12.6",
     "chalk": "^5.2.0",
     "eslint": "^8.55.0",
