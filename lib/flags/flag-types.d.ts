@@ -18,3 +18,8 @@ export interface OutputFlags {
   table: boolean;
   verboseConfigs: boolean;
 }
+
+export interface InspectInputContext {
+  configFile: string;
+  rawConfigs: unknown[];
+}
