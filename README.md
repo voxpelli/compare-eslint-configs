@@ -6,17 +6,22 @@
 [![ES Module Ready Badge](https://img.shields.io/badge/es%20module%20ready-yes-success.svg)](https://esmodules.dev/)
 [![Types in JS](https://img.shields.io/badge/types_in_js-yes-brightgreen)](https://github.com/voxpelli/types-in-js)
 
+## Requirements
+
+- Node.js `^20.15.0 || >=22.2.0`
+- ESLint 9+ (flat config format — `eslint.config.js`)
+
 ## Usage
 
 ```bash
 npm install -g compare-eslint-configs
-compare-eslint-configs compare .eslintrc new.eslintrc
+compare-eslint-configs compare eslint.config.js other.eslint.config.js
 ```
 
 Or simply:
 
 ```bash
-npx compare-eslint-configs compare .eslintrc new.eslintrc
+npx compare-eslint-configs compare eslint.config.js other.eslint.config.js
 ```
 
 ## Commands
@@ -26,6 +31,7 @@ Found by running `compare-eslint-configs --help`
   * **compare** - compares the provided eslint config file(s)
   * **diff** - prints what's changed between the second and the first file
   * **summary** - prints a summary of the specified configs
+  * **inspect** - inspects the structure of a flat eslint.config.js file
 
 ## Options
 
@@ -36,40 +42,28 @@ Found by running `compare-eslint-configs <command> --help`, eg: `compare-eslint-
 ### CLI output
 
 ```bash
-npx compare-eslint-configs compare new.eslintrc -t cli.js
+npx compare-eslint-configs compare other.eslint.config.js -f cli.js
 ```
-
-![CLI output](docs/cli-output2.png)
 
 ### Markdown output
 
 ```bash
-npx compare-eslint-configs compare new.eslintrc -t cli.js -m
+npx compare-eslint-configs compare other.eslint.config.js -f cli.js -m
 ```
 
-> # Only active in some:
->
-> * **new.eslintrc**
->   * [for-direction](https://eslint.org/docs/rules/for-direction)
->
->
-> # Mixed severities:
->
-> * [**func-style**](https://eslint.org/docs/rules/func-style)
->   * _warn_: .eslintrc
->   * _error_: new.eslintrc
-> * [**unicorn/prefer-event-target**](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/v43.0.2/docs/rules/prefer-event-target.md)
->   * _warn_: .eslintrc
->   * _error_: new.eslintrc
->
->
-> # Mixed configs where otherwise okay:
->
-> * [**no-console**](https://eslint.org/docs/rules/no-console)
-> * _new.eslintrc_:
->   ```json
->   [{"allow":["warn","error"]}]
->   ```
+### Inspect a config
+
+```bash
+npx compare-eslint-configs inspect eslint.config.js --show-rules
+```
+
+## Migration from v2
+
+v3 requires ESLint 9+ flat config format (`eslint.config.js`). If you're still using `.eslintrc`, first migrate your configs using the [ESLint migration guide](https://eslint.org/docs/latest/use/configure/migration-guide), then use v3.
+
+Key changes:
+- `--target-file` / `-t` renamed to `--for-file` / `-f` (old flag still works with deprecation warning)
+- Commands auto-detect `eslint.config.js` instead of `.eslintrc`
 
 ## See also
 

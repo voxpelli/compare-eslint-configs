@@ -1,19 +1,17 @@
-import chai from 'chai';
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
 
 import { compareConfigs } from '../lib/compare.js';
 
-chai.should();
-
-describe('compare', () => {
-  it('should work', async () => {
-    // TODO: Make it sensible
-    const differences = await compareConfigs({});
-
-    differences.should.deep.equal({
-      'mixedConfigs': {},
-      'mixedSeverity': {},
-      'onlyActiveIn': {},
-      'ruleDocs': {},
+describe('compareConfigs', () => {
+  it('should return empty diff for empty configs', () => {
+    const differences = compareConfigs({});
+    assert.deepStrictEqual(differences, {
+      onlyActiveIn: {},
+      mixedSeverity: {},
+      mixedConfigs: {},
+      ruleDocs: {},
+      deprecated: {},
     });
   });
 });
