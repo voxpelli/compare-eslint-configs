@@ -3,6 +3,7 @@ import type { ESLint, Linter } from 'eslint';
 export interface InputContext {
   configFiles: string[],
   configs: Record<string, { config: Linter.Config, engine: ESLint }>;
+  targetFile: string;
 }
 
 export interface BaseFlags {
