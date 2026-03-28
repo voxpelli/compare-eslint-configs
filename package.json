@@ -1,6 +1,6 @@
 {
   "name": "compare-eslint-configs",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Compares ESLint configs",
   "homepage": "http://github.com/voxpelli/compare-eslint-configs",
   "repository": {
@@ -11,7 +11,7 @@
   "author": "Pelle Wessman <pelle@kodfabrik.se> (http://kodfabrik.se/)",
   "license": "MIT",
   "engines": {
-    "node": "^20.15.0 || >=22.2.0"
+    "node": "^20.19.0 || ^22.13.0 || >=24.0.0"
   },
   "type": "module",
   "bin": {
@@ -26,7 +26,7 @@
     "build:0": "run-s clean",
     "build:1-declaration": "tsc -p declaration.tsconfig.json",
     "build": "run-s build:*",
-    "check:installed-check": "installed-check -i knip",
+    "check:installed-check": "installed-check -i knip -i tstyche",
     "check:knip": "knip",
     "check:lint": "eslint --report-unused-disable-directives .",
     "check:tsc": "tsc",

@@ -2,13 +2,15 @@
 
 [![npm version](https://img.shields.io/npm/v/compare-eslint-configs.svg?style=flat)](https://www.npmjs.com/package/compare-eslint-configs)
 [![npm downloads](https://img.shields.io/npm/dm/compare-eslint-configs.svg?style=flat)](https://www.npmjs.com/package/compare-eslint-configs)
-[![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg)](https://github.com/voxpelli/eslint-config)
+[![neostandard-style](https://img.shields.io/badge/code%20style-neostandard-brightgreen.svg)](https://github.com/neostandard/neostandard)
 [![ES Module Ready Badge](https://img.shields.io/badge/es%20module%20ready-yes-success.svg)](https://esmodules.dev/)
 [![Types in JS](https://img.shields.io/badge/types_in_js-yes-brightgreen)](https://github.com/voxpelli/types-in-js)
 
+Compares two or more ESLint flat config files and reports which rules differ — active in some but not others, different severities, or different options. Built for validating config migrations and auditing shared configs.
+
 ## Requirements
 
-- Node.js `^20.15.0 || >=22.2.0`
+- Node.js `^20.19.0 || ^22.13.0 || >=24.0.0`
 - ESLint 9+ (flat config format — `eslint.config.js`)
 
 ## Usage
@@ -33,27 +35,45 @@ Found by running `compare-eslint-configs --help`
   * **summary** - prints a summary of the specified configs
   * **inspect** - inspects the structure of a flat eslint.config.js file
 
-## Options
-
-Found by running `compare-eslint-configs <command> --help`, eg: `compare-eslint-configs compare --help`
-
 ## Example
 
-### CLI output
+### Compare configs
 
 ```bash
-npx compare-eslint-configs compare other.eslint.config.js -f cli.js
+# Compare your config against another config file
+npx compare-eslint-configs compare eslint.config.js path/to/other-eslint.config.js
+
+# Specify which file to compute rules for
+npx compare-eslint-configs compare eslint.config.js other.eslint.config.js -f src/index.ts
 ```
 
-### Markdown output
+### Diff two configs
 
 ```bash
-npx compare-eslint-configs compare other.eslint.config.js -f cli.js -m
+# Show what changed between two configs (directional)
+npx compare-eslint-configs diff old.eslint.config.js new.eslint.config.js
+
+# Output as JSON for CI pipelines
+npx compare-eslint-configs diff old.eslint.config.js new.eslint.config.js --json
 ```
 
-### Inspect a config
+### Summarize a config
 
 ```bash
+# Show all rules in a config
+npx compare-eslint-configs summary eslint.config.js
+
+# Table format with markdown output
+npx compare-eslint-configs summary eslint.config.js --table -m
+```
+
+### Inspect config structure
+
+```bash
+# Show the flat config array structure
+npx compare-eslint-configs inspect eslint.config.js
+
+# Include rule names in each config object
 npx compare-eslint-configs inspect eslint.config.js --show-rules
 ```
 

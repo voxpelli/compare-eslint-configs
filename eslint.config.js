@@ -2,7 +2,7 @@ import { defineConfig } from 'eslint/config';
 import { voxpelli } from '@voxpelli/eslint-config';
 
 export default defineConfig([
-  voxpelli({ ignores: ['coverage/**'] }),
+  voxpelli({ ignores: ['coverage/**'], noMocha: true }),
 
   {
     name: 'project/custom-rules',

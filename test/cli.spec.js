@@ -25,6 +25,17 @@ describe('CLI', () => {
     assert.ok(stdout.includes('Rules:'));
   });
 
+  it('should run diff between two fixtures', async () => {
+    const cliFile = path.resolve(__dirname, '../cli.js');
+    const { stdout } = await execFileAsync('node', [
+      cliPath, 'diff',
+      fixture('base.eslint.config.js'),
+      fixture('strict.eslint.config.js'),
+      '-f', cliFile,
+    ]);
+    assert.ok(stdout.length > 0, 'diff should produce output for different configs');
+  });
+
   it('should exit with error for missing config file', async () => {
     await assert.rejects(
       () => execFileAsync('node', [cliPath, 'inspect', fixture('nonexistent.js')]),
