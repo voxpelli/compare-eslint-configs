@@ -1,11 +1,12 @@
 import { voxpelli } from '@voxpelli/eslint-config';
 
 export default [
-  ...voxpelli({
+  ...voxpelli(),
+  {
     rules: {
       'func-style': ['warn', 'declaration', { allowArrowFunctions: true }],
     },
-  }),
+  },
   {
     ignores: ['coverage/**'],
   },

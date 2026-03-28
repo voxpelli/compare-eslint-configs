@@ -44,7 +44,7 @@ Both caught in `cli.js` error boundary. Uses `pony-cause` for error cause chains
 ## Code Conventions
 
 - **ESM only** — `"type": "module"` in package.json
-- **Types in JS** — JSDoc annotations checked by `tsc`, never compiled. 95% type-coverage enforced
+- **Types in JS** — JSDoc annotations checked by `tsc`, never compiled. 99% type-coverage enforced
 - **Generated declarations** — `npm run build` creates `.d.ts` files via `declaration.tsconfig.json`. Hand-authored type files: `advanced-types.d.ts`, `flag-types.d.ts`, `command-types.d.ts`
 - **One CJS exception** — `lib/ajv.cjs` must be CommonJS (AJV requirement in ESM context)
 - **Style** — `@voxpelli/eslint-config` (neostandard-based), `func-style` set to warn with arrow functions allowed
