@@ -1,19 +1,18 @@
+import { defineConfig, globalIgnores } from 'eslint/config';
 import { voxpelli } from '@voxpelli/eslint-config';
 
-export default [
-  ...voxpelli(),
+export default defineConfig(
+  voxpelli(),
+  globalIgnores(['coverage']),
   {
     rules: {
       'func-style': ['warn', 'declaration', { allowArrowFunctions: true }],
     },
   },
   {
-    ignores: ['coverage/**'],
-  },
-  {
     files: ['test/**'],
     rules: {
       'no-unused-expressions': 'off',
     },
-  },
-];
+  }
+);
