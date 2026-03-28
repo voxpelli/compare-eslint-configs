@@ -29,7 +29,7 @@ describe('CLI', () => {
     await assert.rejects(
       () => execFileAsync('node', [cliPath, 'inspect', fixture('nonexistent.js')]),
       (/** @type {Error & { code?: number }} */ err) => {
-        assert.ok(err.code !== 0 || err.message.includes('InputError'));
+        assert.strictEqual(err.code, 1);
         return true;
       }
     );
