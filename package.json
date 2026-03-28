@@ -40,8 +40,8 @@
     "test:node": "c8 --reporter=lcov --reporter=text node --test 'test/**/*.spec.js'",
     "test-ci": "run-s test:*",
     "test": "run-s check test:*",
-    "try": "node cli.js new.eslint.config.js -t cli.js",
-    "try-table": "node cli.js new.eslint.config.js -t cli.js -m -s --table"
+    "try": "node cli.js compare new.eslint.config.js -f cli.js",
+    "try-table": "node cli.js summary new.eslint.config.js -f cli.js -m --table"
   },
   "devDependencies": {
     "@types/eslint": "^9.6.0",
