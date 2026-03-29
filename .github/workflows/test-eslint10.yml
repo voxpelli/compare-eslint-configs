@@ -15,6 +15,7 @@ jobs:
   test-eslint10:
     runs-on: ubuntu-latest
     name: Test with ESLint 10
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

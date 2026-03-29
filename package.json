@@ -44,7 +44,7 @@
     "try-table": "node cli.js summary new.eslint.config.js -f cli.js -m --table"
   },
   "devDependencies": {
-"@types/mdast": "^4.0.4",
+    "@types/mdast": "^4.0.4",
     "@types/node": "^20.19.37",
     "@voxpelli/eslint-config": "^23.0.0",
     "@voxpelli/tsconfig": "^16.1.0",
