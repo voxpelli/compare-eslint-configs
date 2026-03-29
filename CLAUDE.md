@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-CLI tool that compares ESLint configurations (ESLint 9+ flat config format). Four commands: `compare` (multi-config comparison), `diff` (directional two-config diff), `summary` (single-config summary), `inspect` (structure inspection of a flat config). Built on `peowly-commands` for routing and `peowly` for argument parsing.
+CLI tool that compares ESLint configurations (ESLint 9/10 flat config format). Four commands: `compare` (multi-config comparison), `diff` (directional two-config diff), `summary` (single-config summary), `inspect` (structure inspection of a flat config). Built on `peowly-commands` for routing and `peowly` for argument parsing.
 
 ## Commands
 
