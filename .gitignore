@@ -17,3 +17,8 @@
 # Library specific ones
 /test.md
 RETRO-*.md
+
+# Beads / Dolt files (added by bd init)
+.dolt/
+*.db
+.beads-credential-key
