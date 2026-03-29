@@ -73,7 +73,7 @@ describe('diffConfigs', () => {
     const result = diffConfigs(
       { configName: 'target', config: makeConfig({ 'no-console': 'warn' }) },
       { configName: 'source', config: makeConfig({ 'no-console': 'warn', 'prefer-const': 'error' }) },
-      diffOpts,
+      diffOpts
     );
     assert.notStrictEqual(result, false);
     assert.ok(result);
@@ -84,7 +84,7 @@ describe('diffConfigs', () => {
     const result = diffConfigs(
       { configName: 'target', config: makeConfig({ 'no-console': 'warn', 'prefer-const': 'error' }) },
       { configName: 'source', config: makeConfig({ 'no-console': 'warn' }) },
-      diffOpts,
+      diffOpts
     );
     assert.notStrictEqual(result, false);
     assert.ok(result);
@@ -95,7 +95,7 @@ describe('diffConfigs', () => {
     const result = diffConfigs(
       { configName: 'target', config: makeConfig({ 'no-console': 'warn' }) },
       { configName: 'source', config: makeConfig({ 'no-console': 'error' }) },
-      diffOpts,
+      diffOpts
     );
     assert.notStrictEqual(result, false);
     assert.ok(result);
@@ -106,7 +106,7 @@ describe('diffConfigs', () => {
     const result = diffConfigs(
       { configName: 'target', config: makeConfig({ 'no-console': 'error' }) },
       { configName: 'source', config: makeConfig({ 'no-console': 'error' }) },
-      diffOpts,
+      diffOpts
     );
     assert.strictEqual(result, false);
   });
@@ -115,7 +115,7 @@ describe('diffConfigs', () => {
     const result = diffConfigs(
       { configName: 'target', config: makeConfig({ 'no-console': 1 }) },
       { configName: 'source', config: makeConfig({ 'no-console': 2 }) },
-      diffOpts,
+      diffOpts
     );
     assert.notStrictEqual(result, false);
     assert.ok(result);
@@ -126,7 +126,7 @@ describe('diffConfigs', () => {
     const result = diffConfigs(
       { configName: 'target', config: makeConfigWithMeta({ 'old-rule': 'error' }, { 'old-rule': { deprecated: true } }) },
       { configName: 'source', config: makeConfigWithMeta({ 'old-rule': 'error', 'extra-rule': 'warn' }, { 'old-rule': { deprecated: true } }) },
-      diffOpts,
+      diffOpts
     );
     assert.notStrictEqual(result, false);
     assert.ok(result);
