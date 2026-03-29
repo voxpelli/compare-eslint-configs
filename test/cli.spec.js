@@ -65,20 +65,30 @@ describe('CLI', () => {
     );
   });
 
-  it('should exit with code 1 when --json used with compare', async () => {
-    await assert.rejects(
-      () => execFileAsync('node', [
-        cliPath, 'compare',
-        fixture('base.eslint.config.js'),
-        fixture('strict.eslint.config.js'),
-        '-f', path.resolve(__dirname, '../cli.js'),
-        '--json',
-      ]),
-      (/** @type {Error & { code?: number }} */ err) => {
-        assert.strictEqual(err.code, 1);
-        return true;
-      }
-    );
+  it('should output valid JSON for compare --json', async () => {
+    const { stdout } = await execFileAsync('node', [
+      cliPath, 'compare',
+      fixture('base.eslint.config.js'),
+      fixture('strict.eslint.config.js'),
+      '-f', path.resolve(__dirname, '../cli.js'),
+      '--json',
+    ]);
+    const parsed = JSON.parse(stdout);
+    assert.ok(parsed.onlyActiveIn || parsed.mixedSeverity || parsed.mixedConfigs);
+  });
+
+  it('should output valid JSON for summary --json', async () => {
+    const { stdout } = await execFileAsync('node', [
+      cliPath, 'summary',
+      fixture('base.eslint.config.js'),
+      '-f', path.resolve(__dirname, '../cli.js'),
+      '--json',
+    ]);
+    const parsed = JSON.parse(stdout);
+    assert.ok(typeof parsed === 'object' && parsed !== null);
+    // Should contain rule names as keys
+    const keys = Object.keys(parsed);
+    assert.ok(keys.length > 0, 'summary JSON should contain rules');
   });
 
   it('should exit with error for missing config file', async () => {

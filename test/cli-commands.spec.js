@@ -65,4 +65,23 @@ describe('CLI: summary command', () => {
     // Markdown has # headers or * lists
     assert.ok(stdout.includes('#') || stdout.includes('*'));
   });
+
+  it('should output valid JSON with --json', async () => {
+    const { stdout } = await execFileAsync('node', [
+      cliPath, 'summary',
+      fixture('base.eslint.config.js'),
+      '-f', cliJs,
+      '--json',
+    ]);
+    const parsed = JSON.parse(stdout);
+    assert.ok(typeof parsed === 'object' && parsed !== null);
+    const keys = Object.keys(parsed);
+    assert.ok(keys.length > 0, 'summary JSON should contain rules');
+    // docUrls should be arrays, not Sets
+    for (const rule of Object.values(parsed)) {
+      if (/** @type {Record<string, unknown>} */ (rule)['docUrls']) {
+        assert.ok(Array.isArray(/** @type {Record<string, unknown>} */ (rule)['docUrls']));
+      }
+    }
+  });
 });
