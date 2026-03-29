@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { compareConfigs, summarizeConfigs } from '../lib/compare.js';
+import { compareConfigs, diffConfigs, summarizeConfigs } from '../lib/compare.js';
 
 /** @param {Record<string, unknown>} rules */
 const makeConfig = (rules) => /** @type {any} */ ({
@@ -54,5 +54,82 @@ describe('compareConfigs', () => {
     });
     assert.deepStrictEqual(result.mixedSeverity['no-console']?.error, ['strict']);
     assert.deepStrictEqual(result.mixedSeverity['no-console']?.warn, ['lenient']);
+  });
+});
+
+/**
+ * @param {Record<string, unknown>} rules
+ * @param {Record<string, unknown>} [meta]
+ */
+const makeConfigWithMeta = (rules, meta = {}) => /** @type {any} */ ({
+  config: { rules },
+  engine: { getRulesMetaForResults: () => meta },
+});
+
+describe('diffConfigs', () => {
+  const diffOpts = { targetFile: '', verbose: false };
+
+  it('should detect added rules', () => {
+    const result = diffConfigs(
+      { configName: 'target', config: makeConfig({ 'no-console': 'warn' }) },
+      { configName: 'source', config: makeConfig({ 'no-console': 'warn', 'prefer-const': 'error' }) },
+      diffOpts,
+    );
+    assert.notStrictEqual(result, false);
+    assert.ok(result);
+    assert.strictEqual(result.added['prefer-const']?.severity, 'error');
+  });
+
+  it('should detect removed rules', () => {
+    const result = diffConfigs(
+      { configName: 'target', config: makeConfig({ 'no-console': 'warn', 'prefer-const': 'error' }) },
+      { configName: 'source', config: makeConfig({ 'no-console': 'warn' }) },
+      diffOpts,
+    );
+    assert.notStrictEqual(result, false);
+    assert.ok(result);
+    assert.ok(result.removed['prefer-const']);
+  });
+
+  it('should detect changed severity', () => {
+    const result = diffConfigs(
+      { configName: 'target', config: makeConfig({ 'no-console': 'warn' }) },
+      { configName: 'source', config: makeConfig({ 'no-console': 'error' }) },
+      diffOpts,
+    );
+    assert.notStrictEqual(result, false);
+    assert.ok(result);
+    assert.ok(result.changedSeverity['no-console']);
+  });
+
+  it('should return false when configs are identical', () => {
+    const result = diffConfigs(
+      { configName: 'target', config: makeConfig({ 'no-console': 'error' }) },
+      { configName: 'source', config: makeConfig({ 'no-console': 'error' }) },
+      diffOpts,
+    );
+    assert.strictEqual(result, false);
+  });
+
+  it('should handle numeric severity levels', () => {
+    const result = diffConfigs(
+      { configName: 'target', config: makeConfig({ 'no-console': 1 }) },
+      { configName: 'source', config: makeConfig({ 'no-console': 2 }) },
+      diffOpts,
+    );
+    assert.notStrictEqual(result, false);
+    assert.ok(result);
+    assert.ok(result.changedSeverity['no-console']);
+  });
+
+  it('should propagate deprecated metadata', () => {
+    const result = diffConfigs(
+      { configName: 'target', config: makeConfigWithMeta({ 'old-rule': 'error' }, { 'old-rule': { deprecated: true } }) },
+      { configName: 'source', config: makeConfigWithMeta({ 'old-rule': 'error', 'extra-rule': 'warn' }, { 'old-rule': { deprecated: true } }) },
+      diffOpts,
+    );
+    assert.notStrictEqual(result, false);
+    assert.ok(result);
+    assert.strictEqual(result.deprecated['old-rule'], true);
   });
 });
