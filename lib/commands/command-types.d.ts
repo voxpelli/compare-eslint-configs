@@ -11,4 +11,14 @@ export interface CommandContextInspect extends InspectInputContext {
   showRules: boolean;
 }
 
+export interface CommandContextAudit {
+  configFile: string;
+  rawConfigs: unknown[];
+  markdownOutput: boolean;
+  jsonOutput: boolean;
+  skipLinks: boolean;
+  showUnconfigured: boolean;
+  exitCode: boolean;
+}
+
 export interface CommandContextSummary extends CommandContextBase, OutputFlags {}
