@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { getDeepDifference } from '../lib/utils/diff.js';
+import { getDeepDifference } from '@voxpelli/deep-diff-value';
 
 describe('getDeepDifference', () => {
   it('should return undefined for equal primitives', () => {

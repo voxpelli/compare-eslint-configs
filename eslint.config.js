@@ -13,7 +13,7 @@ export default defineConfig([
 
   {
     name: 'project/test',
-    files: ['test/**'],
+    files: ['test/**', 'packages/*/test/**'],
     rules: {
       'no-unused-expressions': 'off',
     },

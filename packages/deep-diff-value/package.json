@@ -1,0 +1,28 @@
+{
+  "name": "@voxpelli/deep-diff-value",
+  "version": "1.0.0",
+  "description": "One-directional structural diff — returns only changed parts of valueB",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    }
+  },
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "license": "MIT",
+  "author": "Pelle Wessman <pelle@kodfabrik.se>",
+  "files": ["index.js", "index.d.ts"],
+  "engines": { "node": "^20.19.0 || ^22.13.0 || >=24.0.0" },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/voxpelli/compare-eslint-configs.git",
+    "directory": "packages/deep-diff-value"
+  },
+  "dependencies": {
+    "@voxpelli/typed-utils": "^4.0.0",
+    "fast-deep-equal": "^3.1.3",
+    "is-plain-obj": "^4.1.0"
+  }
+}

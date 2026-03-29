@@ -14,6 +14,7 @@
     "node": "^20.19.0 || ^22.13.0 || >=24.0.0"
   },
   "type": "module",
+  "workspaces": ["packages/*"],
   "bin": {
     "compare-eslint-configs": "cli.js"
   },
@@ -58,6 +59,7 @@
     "typescript": "~5.9.3"
   },
   "dependencies": {
+    "@voxpelli/deep-diff-value": "^1.0.0",
     "@voxpelli/typed-utils": "^4.0.0",
     "ajv": "^6.12.6",
     "chalk": "^5.2.0",
@@ -68,5 +70,8 @@
     "peowly": "^1.3.2",
     "peowly-commands": "^1.1.0",
     "pony-cause": "^2.1.11"
-  }
+  },
+  "bundledDependencies": [
+    "@voxpelli/deep-diff-value"
+  ]
 }

@@ -12,11 +12,11 @@ function improvedIsPlainObject (value) {
 
 /**
  * @template ValueA
- * @template {ValueA | import('../advanced-types.js').DeepPartial<ValueA>} ValueB
+ * @template {ValueA | import('./index.js').DeepPartial<ValueA>} ValueB
  * @param {ValueA | undefined} valueA
  * @param {ValueB | undefined} valueB
  * @param {number} depth
- * @returns {ValueB | import('../advanced-types.js').DeepPartial<ValueB> | undefined}
+ * @returns {ValueB | import('./index.js').DeepPartial<ValueB> | undefined}
  */
 function innerGetDeepDifference (valueA, valueB, depth) {
   if (valueA === valueB || equal(valueA, valueB)) {
@@ -40,7 +40,7 @@ function innerGetDeepDifference (valueA, valueB, depth) {
       return;
     }
 
-    return /** @type {import('../advanced-types.js').DeepPartial<ValueB & unknown[]>} */ (result);
+    return /** @type {import('./index.js').DeepPartial<ValueB & unknown[]>} */ (result);
   }
 
   if (improvedIsPlainObject(valueB)) {
@@ -71,7 +71,7 @@ function innerGetDeepDifference (valueA, valueB, depth) {
       return;
     }
 
-    return /** @type {import('../advanced-types.js').DeepPartial<ValueB & Record<PropertyKey, unknown>>} */ (result);
+    return /** @type {import('./index.js').DeepPartial<ValueB & Record<PropertyKey, unknown>>} */ (result);
   }
 
   return valueB;
@@ -79,10 +79,10 @@ function innerGetDeepDifference (valueA, valueB, depth) {
 
 /**
  * @template ValueA
- * @template {ValueA | import('../advanced-types.js').DeepPartial<ValueA>} ValueB
+ * @template {ValueA | import('./index.js').DeepPartial<ValueA>} ValueB
  * @param {ValueA | undefined} valueA
  * @param {ValueB | undefined} valueB
- * @returns {ValueB | import('../advanced-types.js').DeepPartial<ValueB> | undefined}
+ * @returns {ValueB | import('./index.js').DeepPartial<ValueB> | undefined}
  */
 export function getDeepDifference (valueA, valueB) {
   return innerGetDeepDifference(valueA, valueB, 0);
