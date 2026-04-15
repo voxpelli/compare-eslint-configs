@@ -34,7 +34,7 @@ Found by running `compare-eslint-configs --help`
   * **diff** - prints what's changed between the second and the first file
   * **summary** - prints a summary of the specified configs
   * **inspect** - inspects the structure of a flat eslint.config.js file
-  * **audit** - audits a config for deprecated rules and coverage stats
+  * **audit** - audits a config for deprecated rules (builtin and plugin) and coverage stats
 
 ## Example
 
