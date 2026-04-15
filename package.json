@@ -20,7 +20,8 @@
   "author": "Pelle Wessman <pelle@kodfabrik.se> (http://kodfabrik.se/)",
   "license": "MIT",
   "engines": {
-    "node": "^20.19.0 || ^22.13.0 || >=24.0.0"
+    "node": "^22.13.0 || >=24.0.0",
+    "typescript": ">=5.9"
   },
   "type": "module",
   "bin": {
@@ -55,17 +56,17 @@
   },
   "devDependencies": {
     "@types/mdast": "^4.0.4",
-    "@types/node": "^20.19.37",
+    "@types/node": "^22.19.17",
     "@voxpelli/eslint-config": "^23.0.0",
-    "@voxpelli/tsconfig": "^16.1.0",
+    "@voxpelli/tsconfig": "^16.2.1",
     "c8": "^11.0.0",
     "husky": "^9.1.7",
     "installed-check": "^10.0.1",
-    "knip": "^5.86.0",
+    "knip": "^6.4.1",
     "npm-run-all2": "^8.0.4",
     "tstyche": "^6.2.0",
     "type-coverage": "^2.29.7",
-    "typescript": "~5.9.3"
+    "typescript": "~6.0.2"
   },
   "dependencies": {
     "@voxpelli/deep-diff-value": "^1.0.0",
