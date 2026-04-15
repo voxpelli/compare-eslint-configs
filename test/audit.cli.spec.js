@@ -50,4 +50,12 @@ describe('CLI: audit command', () => {
     const { stdout } = await execFileAsync('node', [cliPath, 'audit']);
     assert.ok(stdout.includes('Coverage') || stdout.includes('Configured'));
   });
+
+  it('should show deprecated plugin rules in output', async () => {
+    const { stdout } = await execFileAsync('node', [
+      cliPath, 'audit', fixture('deprecated-plugin.eslint.config.js'),
+    ]);
+    assert.ok(stdout.includes('fake/old-rule'), 'should show deprecated plugin rule in output');
+    assert.ok(stdout.includes('[deprecated]'), 'should show [deprecated] marker');
+  });
 });
