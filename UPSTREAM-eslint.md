@@ -17,10 +17,7 @@
   Source: lib/flags/input.js + lib/compare.js · Merge readiness: direct — documentation PR only
   Ownership: us · Workaround: full — documented in project CLAUDE.md
 
-- **Core comparison engine as `eslint-config-diff` library** (2026-03-29) — The engine (496 LOC: `summarizeConfigs`/`compareConfigs`/`diffConfigs` + AJV helpers + deep diff) is cleanly bounded with zero CLI dependencies. No competing programmatic ESLint config comparison library exists on npm. Extracting would enable CI bots, IDE extensions, and migration tools to compare configs without spawning the CLI.
-  Source: lib/compare.js, lib/ajv.cjs, lib/ajv-helper.js, lib/utils/diff.js · Merge readiness: needs-redesign — boundary exists but needs package scaffolding and API docs
+- **Core comparison engine as `eslint-config-diff` library** (2026-03-29) — The engine (`summarizeConfigs`/`compareConfigs`/`diffConfigs` + AJV helpers) is cleanly bounded with zero CLI dependencies. The deep-diff component is already extracted as `@voxpelli/deep-diff-value`. No competing programmatic ESLint config comparison library exists on npm. Extracting would enable CI bots, IDE extensions, and migration tools to compare configs without spawning the CLI.
+  Source: lib/compare.js, lib/ajv.cjs, lib/ajv-helper.js · Merge readiness: needs-redesign — boundary exists but needs package scaffolding and API docs
   Ownership: us · Workaround: full — CLI tool works, but no programmatic API for consumers
 
-- **Migrate `findDefaultConfig` to `ESLint.findConfigFile()`** (2026-03-29) — ESLint v9+ provides `ESLint.findConfigFile()` which does the same flat config discovery. Our manual `FLAT_CONFIG_NAMES` list is a maintenance liability. Should migrate to the official API.
-  Source: lib/flags/input.js (findDefaultConfig) · Merge readiness: direct — replace local code with ESLint API call
-  Ownership: us · Workaround: full — current implementation works

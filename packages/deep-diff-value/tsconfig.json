@@ -1,5 +1,0 @@
-{
-  "extends": "@voxpelli/tsconfig/node20.json",
-  "include": ["index.js", "test/**/*"],
-  "compilerOptions": { "types": ["node"] }
-}
