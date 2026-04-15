@@ -34,9 +34,11 @@ describe('CLI: compare command', () => {
     assert.ok(!stdout.includes('](http'), '--no-links should suppress markdown links');
   });
 
-  it('should expose --verbose-configs flag', async () => {
+  it('should only expose relevant output flags', async () => {
     const { stdout } = await execFileAsync('node', [cliPath, 'compare', '--help']);
-    assert.ok(stdout.includes('--verbose-configs'), 'flag should be kebab-case');
+    assert.ok(stdout.includes('--group-rules'), 'compare should expose --group-rules');
+    assert.ok(!stdout.includes('--table'), 'compare should not expose --table');
+    assert.ok(!stdout.includes('--verbose-configs'), 'compare should not expose --verbose-configs');
   });
 
   it('should auto-detect local config when only one file given', async () => {

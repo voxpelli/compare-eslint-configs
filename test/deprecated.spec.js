@@ -18,8 +18,8 @@ describe('deprecated rule display', () => {
       '-f', path.resolve(__dirname, '../cli.js'),
     ]);
     assert.ok(
-      stdout.includes('[deprecated]') || stdout.includes('deprecated'),
-      `Expected [deprecated] in output, got: ${stdout.slice(0, 200)}`
+      stdout.includes('[deprecated]'),
+      `Expected [deprecated] marker in output, got: ${stdout.slice(0, 200)}`
     );
   });
 
@@ -32,5 +32,6 @@ describe('deprecated rule display', () => {
     ]);
     // The diff should mention no-return-await (added) and it should be marked deprecated
     assert.ok(stdout.includes('no-return-await'), 'Expected no-return-await in diff output');
+    assert.ok(stdout.includes('[deprecated]'), 'Expected [deprecated] marker in diff output');
   });
 });

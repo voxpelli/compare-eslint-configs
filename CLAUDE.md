@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-CLI tool that compares ESLint configurations (ESLint 9/10 flat config format). Four commands: `compare` (multi-config comparison), `diff` (directional two-config diff), `summary` (single-config summary), `inspect` (structure inspection of a flat config). Built on `peowly-commands` for routing and `peowly` for argument parsing.
+CLI tool that compares ESLint configurations (ESLint 9/10 flat config format). Five commands: `compare` (multi-config comparison), `diff` (directional two-config diff), `summary` (single-config summary), `inspect` (structure inspection of a flat config), `audit` (deprecated rule detection and coverage stats). Built on `peowly-commands` for routing and `peowly` for argument parsing.
 
 ## Commands
 
@@ -28,7 +28,7 @@ Try the CLI locally: `node cli.js compare other.eslint.config.js -f cli.js`
 ### Core modules
 
 - **`lib/compare.js`** — Three main functions: `summarizeConfigs()` aggregates rules across configs using ESLint's engine + AJV schema validation; `compareConfigs()` categorizes differences (onlyActiveIn, mixedSeverity, mixedConfigs); `diffConfigs()` does directional comparison (added, removed, changed). Extracts deprecated rule metadata where available
-- **`lib/commands/`** — Each command is `{ description, run(argv, meta, ctx) }`. Commands: `compare`, `diff`, `summary`, `inspect`. Commands compose flags via spread from `lib/flags/` modules, then call `resolveInputContext()` to load ESLint configs and `resolveOutputFlags()` to validate output options
+- **`lib/commands/`** — Each command is `{ description, run(argv, meta, ctx) }`. Commands: `compare`, `diff`, `summary`, `inspect`, `audit`. Each command picks only the output flags it supports from `outputFlags` (no wholesale spread) so `--help` only shows relevant options. Commands call `resolveInputContext()` to load ESLint configs and `resolveOutputFlags()` (accepts partial flags) to validate output options
 - **`lib/flags/`** — Modular flag definitions (`input.js`, `output.js`, `misc.js`) with paired `resolve*()` functions that validate and normalize. `--for-file` / `-f` specifies the target file for config resolution (`--target-file` / `-t` still works with deprecation warning)
 - **`lib/print-*.js`** — Output formatting via `markdown-or-chalk` for dual CLI/Markdown rendering. Uses MDAST internally for structured content
 - **`lib/ajv.cjs`** — Copied from ESLint source (CommonJS required). Configures AJV with Draft-04 meta schema for rule option validation

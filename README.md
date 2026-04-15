@@ -10,7 +10,7 @@ Compares two or more ESLint flat config files and reports which rules differ —
 
 ## Requirements
 
-- Node.js `^20.19.0 || ^22.13.0 || >=24.0.0`
+- Node.js `^22.13.0 || >=24.0.0`
 - ESLint 9 or 10 (flat config format — `eslint.config.js`)
 
 ## Usage
