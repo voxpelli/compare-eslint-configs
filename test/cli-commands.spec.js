@@ -23,6 +23,22 @@ describe('CLI: compare command', () => {
     assert.ok(stdout.includes('prefer-const') || stdout.includes('no-var'));
   });
 
+  it('should suppress links with --no-links', async () => {
+    const { stdout } = await execFileAsync('node', [
+      cliPath, 'compare',
+      fixture('base.eslint.config.js'),
+      fixture('strict.eslint.config.js'),
+      '-f', cliJs,
+      '--no-links', '-m',
+    ]);
+    assert.ok(!stdout.includes('](http'), '--no-links should suppress markdown links');
+  });
+
+  it('should expose --verbose-configs flag', async () => {
+    const { stdout } = await execFileAsync('node', [cliPath, 'compare', '--help']);
+    assert.ok(stdout.includes('--verbose-configs'), 'flag should be kebab-case');
+  });
+
   it('should auto-detect local config when only one file given', async () => {
     const { stdout } = await execFileAsync('node', [
       cliPath, 'compare',
