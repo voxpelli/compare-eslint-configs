@@ -34,6 +34,7 @@ Found by running `compare-eslint-configs --help`
   * **diff** - prints what's changed between the second and the first file
   * **summary** - prints a summary of the specified configs
   * **inspect** - inspects the structure of a flat eslint.config.js file
+  * **audit** - audits a config for deprecated rules and coverage stats
 
 ## Example
 
@@ -75,6 +76,34 @@ npx compare-eslint-configs inspect eslint.config.js
 
 # Include rule names in each config object
 npx compare-eslint-configs inspect eslint.config.js --show-rules
+```
+
+### Audit a config
+
+```bash
+# Check for deprecated rules and coverage stats
+npx compare-eslint-configs audit eslint.config.js
+
+# Show all builtin ESLint rules not present in the config
+npx compare-eslint-configs audit eslint.config.js --show-unconfigured
+
+# Exit with code 1 if deprecated rules found (for CI)
+npx compare-eslint-configs audit eslint.config.js --exit-code
+
+# Output as JSON for scripting
+npx compare-eslint-configs audit eslint.config.js --json
+```
+
+### CI integration
+
+Use `--exit-code` / `-e` with `diff` or `audit` to fail CI pipelines on regressions or deprecated rules:
+
+```bash
+# Fail CI if the new config removed or changed any rules vs the old config
+npx compare-eslint-configs diff old.eslint.config.js new.eslint.config.js --exit-code
+
+# Fail CI if any deprecated rules are still configured
+npx compare-eslint-configs audit eslint.config.js --exit-code
 ```
 
 ## Migration from v2

@@ -7,7 +7,16 @@
     "type": "git",
     "url": "git://github.com/voxpelli/compare-eslint-configs.git"
   },
-  "keywords": [],
+  "keywords": [
+    "eslint",
+    "eslint-config",
+    "flat-config",
+    "compare",
+    "diff",
+    "audit",
+    "migration",
+    "cli"
+  ],
   "author": "Pelle Wessman <pelle@kodfabrik.se> (http://kodfabrik.se/)",
   "license": "MIT",
   "engines": {
