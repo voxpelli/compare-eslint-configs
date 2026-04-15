@@ -22,3 +22,9 @@ RETRO-*.md
 .dolt/
 *.db
 .beads-credential-key
+
+# Swarm wave working files
+SWARM-*.md
+
+# Research
+/scratch
