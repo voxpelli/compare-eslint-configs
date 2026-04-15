@@ -24,7 +24,7 @@ describe('findDefaultConfig', () => {
       assert.ok(result.startsWith('..'), 'result should start with ..');
       assert.ok(result.endsWith('eslint.config.js'), 'result should end with eslint.config.js');
     } finally {
-      await rmdir(subDir);
+      await rmdir(subDir); // eslint-disable-line security/detect-non-literal-fs-filename
     }
   });
 
@@ -36,7 +36,7 @@ describe('findDefaultConfig', () => {
         { name: 'InputError' }
       );
     } finally {
-      await rmdir(emptyDir);
+      await rmdir(emptyDir); // eslint-disable-line security/detect-non-literal-fs-filename
     }
   });
 });

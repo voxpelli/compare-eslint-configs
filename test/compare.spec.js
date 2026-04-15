@@ -3,8 +3,7 @@ import assert from 'node:assert/strict';
 
 import { compareConfigs, diffConfigs, summarizeConfigs } from '../lib/compare.js';
 
-/** @param {Record<string, unknown>} rules */
-const makeConfig = (rules) => /** @type {any} */ ({
+const makeConfig = (/** @type {Record<string, unknown>} */ rules) => /** @type {any} */ ({
   config: { rules },
   engine: { getRulesMetaForResults: () => ({}) },
 });
@@ -57,11 +56,7 @@ describe('compareConfigs', () => {
   });
 });
 
-/**
- * @param {Record<string, unknown>} rules
- * @param {Record<string, unknown>} [meta]
- */
-const makeConfigWithMeta = (rules, meta = {}) => /** @type {any} */ ({
+const makeConfigWithMeta = (/** @type {Record<string, unknown>} */ rules, meta = {}) => /** @type {any} */ ({
   config: { rules },
   engine: { getRulesMetaForResults: () => meta },
 });
