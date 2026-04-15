@@ -16,6 +16,18 @@ describe('findDefaultConfig', () => {
     assert.strictEqual(result, 'eslint.config.js');
   });
 
+  it('should return a relative path with .. when cwd is a subdirectory', async () => {
+    const subDir = await mkdtemp(path.join(projectRoot, 'tmp-test-'));
+    try {
+      const result = await findDefaultConfig(subDir);
+      assert.ok(!path.isAbsolute(result), 'result should be a relative path');
+      assert.ok(result.startsWith('..'), 'result should start with ..');
+      assert.ok(result.endsWith('eslint.config.js'), 'result should end with eslint.config.js');
+    } finally {
+      await rmdir(subDir);
+    }
+  });
+
   it('should throw InputError when no config found', async () => {
     const emptyDir = await mkdtemp(path.join(tmpdir(), 'test-'));
     try {
