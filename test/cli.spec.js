@@ -58,8 +58,7 @@ describe('CLI', () => {
         '-e',
       ]),
       (/** @type {Error & { code?: number }} */ err) => {
-        // ResultError uses process.exitCode, not process.exit
-        assert.ok(err.code !== 0);
+        assert.strictEqual(err.code, 1);
         return true;
       }
     );
