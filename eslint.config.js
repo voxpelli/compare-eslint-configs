@@ -1,8 +1,8 @@
-import { defineConfig } from 'eslint/config';
 import { voxpelli } from '@voxpelli/eslint-config';
+import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
-  voxpelli({ ignores: ['coverage/**'], noMocha: true }),
+  voxpelli({ noMocha: true }),
 
   {
     name: 'project/custom-rules',
