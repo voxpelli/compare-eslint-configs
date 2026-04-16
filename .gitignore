@@ -21,5 +21,8 @@ RETRO-*.md
 # Swarm wave working files
 SWARM-*.md
 
+# Upstream tracker working files
+UPSTREAM-*.md
+
 # Research
 /scratch
