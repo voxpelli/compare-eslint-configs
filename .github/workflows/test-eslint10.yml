@@ -1,0 +1,26 @@
+name: Test (ESLint 10)
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  test-eslint10:
+    runs-on: ubuntu-latest
+    name: Test with ESLint 10
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --legacy-peer-deps
+      - run: npm install eslint@10 --no-save --legacy-peer-deps
+      - run: npm run test:node

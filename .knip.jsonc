@@ -1,5 +1,4 @@
 {
-  "$schema": "https://unpkg.com/knip@2/schema.json",
-  "entry": ["cli.js!"],
-  "ignoreDependencies": ["@types/mdast", "@types/mocha"]
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "ignore": ["new.eslint.config.js"]
 }
