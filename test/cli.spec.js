@@ -46,6 +46,8 @@ describe('CLI', () => {
     ]);
     const parsed = JSON.parse(stdout);
     assert.ok(parsed.added || parsed.removed || parsed.changedSeverity || parsed.changedConfig);
+    assert.ok(typeof parsed.deprecated === 'object' && parsed.deprecated !== null, 'diff --json should include deprecated field');
+    assert.ok(typeof parsed.ruleDocs === 'object' && parsed.ruleDocs !== null, 'diff --json should include ruleDocs field');
   });
 
   it('should exit with code 1 when --exit-code is set and diff exists', async () => {
