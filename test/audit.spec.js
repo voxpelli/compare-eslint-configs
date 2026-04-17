@@ -50,6 +50,15 @@ describe('auditConfig', () => {
     assert.strictEqual(result.stats.totalConfigured, 0);
   });
 
+  it('should respect off overrides after an earlier enable', () => {
+    const result = auditConfig([
+      { rules: { 'no-extra-semi': 'error' } },
+      { rules: { 'no-extra-semi': 'off' } },
+    ]);
+    assert.strictEqual(result.stats.totalConfigured, 0);
+    assert.ok(!result.deprecatedRules.some(r => r.ruleName === 'no-extra-semi'));
+  });
+
   it('should detect plugin names', () => {
     const result = auditConfig([{
       plugins: { unicorn: {}, n: {} },
