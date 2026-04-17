@@ -96,10 +96,17 @@ describe('CLI: summary command', () => {
     const keys = Object.keys(parsed);
     assert.ok(keys.length > 0, 'summary JSON should contain rules');
     // docUrls should be arrays, not Sets
-    for (const rule of Object.values(parsed)) {
-      if (/** @type {Record<string, unknown>} */ (rule)['docUrls']) {
-        assert.ok(Array.isArray(/** @type {Record<string, unknown>} */ (rule)['docUrls']));
+    let docUrlsChecked = 0;
+    for (const perConfig of Object.values(parsed)) {
+      const rules = /** @type {Record<string, unknown>} */ (perConfig);
+      for (const rule of Object.values(rules)) {
+        const r = /** @type {Record<string, unknown>} */ (rule);
+        if (r['docUrls']) {
+          assert.ok(Array.isArray(r['docUrls']));
+          docUrlsChecked++;
+        }
       }
     }
+    assert.ok(docUrlsChecked > 0, 'should have checked at least one docUrls field');
   });
 });
