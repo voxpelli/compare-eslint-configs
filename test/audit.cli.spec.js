@@ -58,4 +58,12 @@ describe('CLI: audit command', () => {
     assert.ok(stdout.includes('fake/old-rule'), 'should show deprecated plugin rule in output');
     assert.ok(stdout.includes('[deprecated]'), 'should show [deprecated] marker');
   });
+
+  it('should flatten nested config arrays', async () => {
+    const { stdout } = await execFileAsync('node', [
+      cliPath, 'audit', '--json', fixture('nested.eslint.config.js'),
+    ]);
+    const parsed = JSON.parse(stdout);
+    assert.strictEqual(parsed.stats.totalConfigured, 3, 'should count rules inside nested arrays');
+  });
 });
